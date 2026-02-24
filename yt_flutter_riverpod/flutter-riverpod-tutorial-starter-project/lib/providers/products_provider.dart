@@ -1,5 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_files/models/product.dart';
+
+part 'products_provider.g.dart';
 
 List<Product> allProducts = [
   const Product(
@@ -44,4 +46,23 @@ List<Product> allProducts = [
       image: 'assets/products/guitar.png')
 ];
 
-final productsProvider = Provider((ref)=> null);
+// Manually created providers
+// final productsProvider = Provider((ref) {
+//   return allProducts;
+// });
+
+// final reducedProductsProvider = Provider<List<Product>>((ref) {
+//   return allProducts.where((p) => p.price < 50).toList();
+// });
+
+// automatically generated providers
+
+@riverpod
+List<Product> products(ref) {
+  return allProducts;
+}
+
+@riverpod
+List<Product> reducedProducts(ref) {
+  return allProducts.where((p) => p.price < 50).toList();
+}
