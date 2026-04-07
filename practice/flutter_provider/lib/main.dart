@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_screens/screens/onboard/onboard_cgpt.dart';
+import 'package:flutter_provider/provider/countermodel.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (_) => Countermodel(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: OnboardCgpt(),
+      home: Scaffold(body: Center(child: Text("Bleh!!"))),
     );
   }
 }
