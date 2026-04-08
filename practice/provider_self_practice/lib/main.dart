@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider_todo/providers/todo_provider.dart';
-import 'package:flutter_provider_todo/screens/home_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:provider_self_practice/screens/home_screen.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(create: (_) => TodoProvider(), child: const MyApp()),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: HomeScreen(),
+      home: Scaffold(body: HomeScreen()),
     );
   }
 }

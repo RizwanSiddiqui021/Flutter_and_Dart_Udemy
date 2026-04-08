@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/todo_provider.dart';
-import '../widgets/todo_tile.dart';
+import 'package:provider_self_practice/providers/todo_provider.dart';
+import 'package:provider_self_practice/widgets/todo_tile.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  final TextEditingController todoTitleController = TextEditingController();
 
-  final TextEditingController todoController = TextEditingController();
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,45 +16,40 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(title: Text("Todo App")),
       body: Column(
         children: [
-          // Input + Button
           Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
-                    controller: todoController,
+                    controller: todoTitleController,
                     decoration: InputDecoration(
-                      hintText: "Enter a task",
+                      hintText: "Enter a task...",
                       border: OutlineInputBorder(),
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: () {
-                    if (todoController.text.isNotEmpty) {
-                      provider.addTodo(todoController.text);
-                      todoController.clear();
+                    if (todoTitleController.text.isNotEmpty) {
+                      provider.addTodo(todoTitleController.text);
                     }
                   },
-                  child: Text("Add"),
+                  child: Text("Add Todo"),
                 ),
               ],
             ),
           ),
 
-          // Todo List
           Expanded(
             child: ListView.builder(
-              itemCount: provider.items.length,
-              itemBuilder: (context, index) {
-                return TodoTile(
-                  todo: provider.items[index],
-                  onToggle: () => provider.toggleTodo(index),
-                  onDelete: () => provider.removeTodo(index),
-                );
-              },
+              itemCount: provider.todos.length,
+              itemBuilder: TodoTile(
+                todo: provider.todos[index],
+                onToggle: () => provider.toggleTodo(index),
+                onDelete: () => provider.deleteTodo(index),
+              ),
             ),
           ),
         ],
