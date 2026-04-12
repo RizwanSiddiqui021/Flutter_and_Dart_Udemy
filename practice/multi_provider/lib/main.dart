@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:multi_provider/providers/auth_provider.dart';
 import 'package:multi_provider/providers/notes_provider.dart';
 import 'package:multi_provider/providers/theme_provider.dart';
+import 'package:multi_provider/screens/login_screen.dart';
+import 'package:multi_provider/screens/note_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -22,10 +24,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const Scaffold(body: Center(child: Text("Kaabom!"))),
+      theme: ThemeData(
+        brightness: themeProvider.isDark ? Brightness.dark : Brightness.light,
+      ),
+      home: authProvider.isLoggedIn ? NoteScreen() : LoginScreen(),
     );
   }
 }
