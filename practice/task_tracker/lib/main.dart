@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:task_tracker/providers/auth_provider.dart';
 import 'package:task_tracker/providers/task_provider.dart';
 import 'package:task_tracker/providers/theme_provider.dart';
+import 'package:task_tracker/screens/login_screen.dart';
+import 'package:task_tracker/screens/main_screen.dart';
 
 void main() {
   runApp(
@@ -23,6 +25,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+    final theme = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: theme.themeMode,
